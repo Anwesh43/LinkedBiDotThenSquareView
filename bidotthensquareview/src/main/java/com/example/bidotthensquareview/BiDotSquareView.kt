@@ -213,4 +213,13 @@ class BiDotSquareView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : BiDotSquareView {
+            val view : BiDotSquareView = BiDotSquareView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
