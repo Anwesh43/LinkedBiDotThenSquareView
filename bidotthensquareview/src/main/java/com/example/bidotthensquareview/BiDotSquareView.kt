@@ -19,7 +19,7 @@ val colors : Array<Int> = arrayOf(
     Color.parseColor(it)
 }.toTypedArray()
 val strokeFactor : Float = 90f
-val sizeFactor : Float = 5.8f
+val sizeFactor : Float = 15.8f
 val delay : Long = 20
 val backColor : Int = Color.parseColor("#BDBDBD")
 val parts : Int = 4
@@ -40,7 +40,7 @@ fun Canvas.drawBiDotSquare(scale : Float, w : Float, h : Float, paint : Paint) {
     save()
     translate(w / 2, h / 2)
     for (j in 0..1) {
-        val rSize : Float = size * sf1
+        val rSize : Float = size * sf1 * 0.5f
         save()
         scale(1f - 2 * j, 1f)
         save()
@@ -48,7 +48,7 @@ fun Canvas.drawBiDotSquare(scale : Float, w : Float, h : Float, paint : Paint) {
         drawRect(RectF(-rSize, -rSize, rSize, rSize), paint)
         restore()
         save()
-        drawCircle((w / 2 - size / 2 - size) * sf4, 0f, size * sf3, paint)
+        drawCircle((w / 2 - size / 2 - size) * sf4, 0f, size * 0.5f * sf3, paint)
         restore()
         restore()
     }
@@ -66,14 +66,15 @@ fun Canvas.drawBDSNode(i : Int, scale : Float, paint : Paint) {
 
 class BiDotSquareView(ctx : Context) : View(ctx) {
 
+    private val renderer : Renderer = Renderer(this)
     override fun onDraw(canvas : Canvas) {
-
+        renderer.render(canvas)
     }
 
     override fun onTouchEvent(event : MotionEvent) : Boolean {
         when (event.action) {
             MotionEvent.ACTION_DOWN -> {
-
+                renderer.handleTap()
             }
         }
         return true
