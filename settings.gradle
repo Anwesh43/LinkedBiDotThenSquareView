@@ -1,0 +1,3 @@
+include ':bidotthensquareview'
+include ':app'
+rootProject.name = "LinkedBiDotThenSquareView"
